@@ -1,0 +1,24 @@
+version: '3'
+services:
+  sql:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ineedsomedatastorage
+  node:
+    image: "node:latest"
+    depends_on:
+      - sql
+    volumes:
+      - "./srv:/srv"
+      - "./src:/src"
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: ineedsomedatastorage
+      PORT: 8000
+    entrypoint:
+      - bash
+      - -c
+      - "node /srv/load.js /srv/data.json && node /srv/server.js /src"
+    ports:
+      - "8000:8000"

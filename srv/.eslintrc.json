@@ -1,0 +1,7 @@
+{
+    "extends": "airbnb-base",
+		"rules": {
+			"no-tabs": ["error", {"allowIndentationTabs": true}],
+			"no-console": "off"
+		}
+}
